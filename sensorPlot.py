@@ -91,15 +91,39 @@ def main():
                                         body=body
                                         ).execute()
     
-        values = [ [time.time()/60/60/24+ 25569 - 5/24, 5, 10, 20]]
-        body = {'values': values}
-        result = sheet.values().append(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+        while True:
+          print ("Waiting for sensor")
+          data, sender = sock.recvfrom(1024)
+          print (str(sender) + '  ' + repr(data))
+          # print(data)
+          # print(str(data))
+
+          # Check for brightness
+          r1 = re.findall(r"l:([\d\.]+)", str(data))
+          if len(r1) > 0:
+            lux = float(r1[0])
+            # print(float(lux))
+
+          # Check for humidity
+          r1 = re.findall(r"h:([\d\.]+)", str(data))
+          if len(r1) > 0:
+            hum = float(r1[0])
+            # print(float(hum))
+
+          # Check for temp
+          r1 = re.findall(r"t:([\d\.]+)", str(data))
+          if len(r1) > 0:
+            temp = float(r1[0])
+            # print(float(temp))
+
+            values = [ [time.time()/60/60/24+ 25569 - 5/24, lux, hum, temp]]
+            body = {'values': values}
+            result = sheet.values().append(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                                     range=SAMPLE_RANGE_NAME,
                                     valueInputOption='USER_ENTERED', 
                                     body=body
                                     ).execute()
-        print(result)
-        break
+          # print(result)
 
 if __name__ == '__main__':
     main()
