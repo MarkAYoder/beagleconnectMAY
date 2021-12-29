@@ -22,7 +22,24 @@ while True:
   # print ("In while True")
   data, sender = sock.recvfrom(1024)
   print (str(sender) + '  ' + repr(data))
-  print(data)
-  print(str(data))
+  # print(data)
+  # print(str(data))
+
+  # Check for brightness
   r1 = re.findall(r"l:([\d\.]+)", str(data))
-  print(r1)
+  if len(r1) > 0:
+    lux = float(r1[0])
+    print(float(lux))
+
+  # Check for humidity
+  r1 = re.findall(r"h:([\d\.]+)", str(data))
+  if len(r1) > 0:
+    hum = float(r1[0])
+    print(float(hum))
+
+  # Check for temp
+  r1 = re.findall(r"t:([\d\.]+)", str(data))
+  if len(r1) > 0:
+    temp = float(r1[0])
+    print(float(temp))
+
