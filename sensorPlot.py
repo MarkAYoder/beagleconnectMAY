@@ -113,17 +113,18 @@ def main():
           # Check for temp
           r1 = re.findall(r"t:([\d\.]+)", str(data))
           if len(r1) > 0:
-            temp = float(r1[0])
+            temp = float(r1[0])*9/5+32
             # print(float(temp))
 
             values = [ [time.time()/60/60/24+ 25569 - 5/24, lux, hum, temp]]
+            print(values)
             body = {'values': values}
             result = sheet.values().append(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                                     range=SAMPLE_RANGE_NAME,
                                     valueInputOption='USER_ENTERED', 
                                     body=body
                                     ).execute()
-          # print(result)
+           #  print(result)
 
 if __name__ == '__main__':
     main()
