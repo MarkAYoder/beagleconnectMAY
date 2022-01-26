@@ -79,6 +79,7 @@ def main():
     sock.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_JOIN_GROUP, mreq)
 
     firstTime = True
+    print("Starting...")
     while True:
         # output Nan if frst time to graphs will be disconnected.
         if firstTime:
@@ -92,9 +93,9 @@ def main():
                                         ).execute()
     
         while True:
-          print ("Waiting for sensor")
+          # print ("Waiting for sensor")
           data, sender = sock.recvfrom(1024)
-          print (str(sender) + '  ' + repr(data))
+          # print (str(sender) + '  ' + repr(data))
           # print(data)
           # print(str(data))
 
@@ -117,7 +118,7 @@ def main():
             # print(float(temp))
 
             values = [ [time.time()/60/60/24+ 25569 - 5/24, lux, hum, temp]]
-            print(values)
+            # print(values)
             body = {'values': values}
             result = sheet.values().append(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                                     range=SAMPLE_RANGE_NAME,

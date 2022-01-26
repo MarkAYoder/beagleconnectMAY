@@ -33,7 +33,7 @@ SAMPLE_RANGE_NAME = 'A2'
 
 BUS="i2c-1"
 iioPATH="/sys/bus/iio/devices/"
-sleepTime=15		# Time in seconds
+sleepTime=15*60		# Time in seconds
 
 def main():
     """Shows basic usage of the Sheets API.
