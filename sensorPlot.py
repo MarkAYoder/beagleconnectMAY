@@ -127,6 +127,24 @@ def main():
                                     ).execute()
            #  print(result)
 
+						# Delete one row for very row added
+            # https://developers.google.com/sheets/api/samples/rowcolumn#delete_rows_or_columns
+            body = {'requests': [
+              {
+                "deleteDimension": {
+									"range": {
+										"dimension": "ROWS",
+										"startIndex": 3,
+										"endIndex": 4
+									}
+								}
+							}
+						]}
+            result = sheet.batchUpdate(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                    body=body
+                                    ).execute()
+            # print(result)
+
 if __name__ == '__main__':
     main()
 # [END sheets_quickstart]
